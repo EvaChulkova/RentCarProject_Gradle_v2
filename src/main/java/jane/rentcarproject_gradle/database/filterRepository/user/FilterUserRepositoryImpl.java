@@ -33,28 +33,6 @@ public class FilterUserRepositoryImpl implements FilterUserRepository {
                 .fetch();
     }
 
-    @Override
-    public User findUserByLoginAndPassword(String login, String password) {
-        Predicate predicate = QPredicate.builder()
-                .add(login, user.login::eq)
-                .add(password, user.password::eq)
-                .buildAnd();
-
-        return new JPAQuery<User>(entityManager)
-                .select(user)
-                .from(user)
-                .where(predicate)
-                .fetchOne();
-    }
-
-    @Override
-    public User findByLogin(String login) {
-        return new JPAQuery<User>(entityManager)
-                .select(user)
-                .from(user)
-                .where(user.login.eq(login))
-                .fetchOne();
-    }
 
     @Override
     public User findClientInformationAboutUserByUserInfo(UserFilter userFilter) {
@@ -72,4 +50,5 @@ public class FilterUserRepositoryImpl implements FilterUserRepository {
                 .where(predicate)
                 .fetchOne();
     }
+
 }

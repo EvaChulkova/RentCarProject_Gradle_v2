@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
-@ControllerAdvice
+@ControllerAdvice(basePackages = "jane.rentcarproject_gradle.http.controller")
 public class ControllerExceptionHandler /*extends ResponseEntityExceptionHandler*/ {
 
     @ExceptionHandler(Exception.class)

@@ -4,13 +4,14 @@ import jane.rentcarproject_gradle.database.entity.User;
 import jane.rentcarproject_gradle.integration.IntegrationTestBase;
 import jane.rentcarproject_gradle.query.filter.UserFilter;
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RequiredArgsConstructor
 class UserRepositoryIT extends IntegrationTestBase {
@@ -19,15 +20,28 @@ class UserRepositoryIT extends IntegrationTestBase {
 
     @Test
     void findUserByLoginTest() {
-        User actualResult = userRepository.findByLogin("nina@gmail.com");
+        String login = "nina@gmail.com";
+        Optional<User> actualUserByLogin = userRepository.findByLogin(login);
 
-        assertThat(actualResult.getLogin()).isEqualTo("nina@gmail.com");
+        assertTrue(actualUserByLogin.isPresent());
+        actualUserByLogin.ifPresent(user -> assertEquals(login, actualUserByLogin.get().getLogin()));
+    }
+
+    @Test
+    void findUserByLoginAndPasswordTest() {
+        String login = "inna@gmail.com";
+        String password = "456";
+
+        Optional<User> actualUserByLoginAndPassword = userRepository.findByLoginAndPassword(login, password);
+
+        assertTrue(actualUserByLoginAndPassword.isPresent());
+        actualUserByLoginAndPassword.ifPresent(user -> assertEquals(login, actualUserByLoginAndPassword.get().getLogin()));
     }
 
     @Test
     void findUsersByFirstnameAndLastnameTest() {
-        List<User> users = userRepository.findAllBy("a", "ov");
-        Assertions.assertThat(users).hasSize(4);
+        List<User> users = userRepository.findAllByFirstNameContainingIgnoreCaseAndLastNameContainingIgnoreCase("a", "ov");
+        assertThat(users).hasSize(4);
     }
 
     @Test
@@ -43,16 +57,6 @@ class UserRepositoryIT extends IntegrationTestBase {
         assertThat(allUsersByUserFilter).hasSize(1);
     }
 
-    @Test
-    void findUserByLoginAndPasswordTest() {
-        String login = "inna@gmail.com";
-        String password = "456";
-
-        User expectedUser = userRepository.findUserByLoginAndPassword(login, password);
-
-        assertThat(expectedUser.getLogin()).isEqualTo(login);
-        assertThat(expectedUser.getPassword()).isEqualTo(password);
-    }
 
     @Test
     void findClientInformationAboutUserByUserInfoTest() {
@@ -78,7 +82,8 @@ class UserRepositoryIT extends IntegrationTestBase {
         userRepository.delete(user);
 
         Optional<User> actualResult = userRepository.findById(user.getId());
-        assertThat(actualResult).isEmpty();
+        assertTrue(actualResult.isEmpty());
+        /*assertThat(actualResult).isEmpty();*/
     }
 
     @Test
@@ -88,7 +93,7 @@ class UserRepositoryIT extends IntegrationTestBase {
 
         Optional<User> savedUser = userRepository.findById(user.getId());
 
-        assertThat(savedUser).isNotEmpty();
+        assertTrue(savedUser.isPresent());
         assertThat(savedUser.get().getId()).isEqualTo(user.getId());
     }
 
@@ -102,6 +107,7 @@ class UserRepositoryIT extends IntegrationTestBase {
 
         Optional<User> actualResult = userRepository.findById(user.getId());
 
+        assertTrue(actualResult.isPresent());
         assertThat(actualResult.get().getLastName()).isEqualTo("NewTestova");
         assertThat(actualResult).contains(user);
     }
