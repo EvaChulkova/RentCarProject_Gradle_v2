@@ -32,7 +32,6 @@ class BookingRepositoryIT extends IntegrationTestBase {
     private static final PaymentStateEnum NOT_PAID_STATE = PaymentStateEnum.NOT_PAID;
 
 
-
     private final UserRepository userRepository;
     private final ClientRepository clientRepository;
     private final CarRepository carRepository;
@@ -80,6 +79,15 @@ class BookingRepositoryIT extends IntegrationTestBase {
 
         List<Booking> notPaidBookings = bookingRepository.findAllByPaymentState(NOT_PAID_STATE);
         assertThat(notPaidBookings).hasSize(4);
+    }
+
+    @Test
+    void findAllBookingInPeriod() {
+        LocalDate rentalStart = LocalDate.of(2023, 3, 1);
+        LocalDate rentalFinish = LocalDate.of(2023, 3, 31);
+
+        List<Booking> actualBookings = bookingRepository.findAllByRentalStartGreaterThanEqualAndRentalFinishLessThanEqual(rentalStart, rentalFinish);
+        assertThat(actualBookings).hasSize(6);
     }
 
     @Test
