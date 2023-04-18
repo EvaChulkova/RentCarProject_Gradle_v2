@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RequiredArgsConstructor
 class ClientRepositoryIT extends IntegrationTestBase {
@@ -33,9 +35,12 @@ class ClientRepositoryIT extends IntegrationTestBase {
 
     @Test
     void findClientByDrivingLicenceNoTest() {
-        Client resultClient = clientRepository.findClientByDrivingLicenceNo(136015);
+        Integer drivingLicenceNo = 136015;
+        
+        Optional<Client> actualClientByDrivingLicenceNo = clientRepository.findByDrivingLicenceNo(drivingLicenceNo);
 
-        assertThat(resultClient.getDrivingLicenceNo()).isEqualTo(136015);
+        assertTrue(actualClientByDrivingLicenceNo.isPresent());
+        actualClientByDrivingLicenceNo.ifPresent(client -> assertEquals(drivingLicenceNo, actualClientByDrivingLicenceNo.get().getDrivingLicenceNo()));
     }
 
     @Test

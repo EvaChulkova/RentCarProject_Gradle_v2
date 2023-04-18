@@ -33,14 +33,6 @@ public class FilterClientRepositoryImpl implements FilterClientRepository {
                 .fetch();
     }
 
-    @Override
-    public Client findClientByDrivingLicenceNo(Integer drivingLicenceNo) {
-        return new JPAQuery<Client>(entityManager)
-                .select(client)
-                .from(client)
-                .where(client.drivingLicenceNo.eq(drivingLicenceNo))
-                .fetchOne();
-    }
 
     @Override
     public Client findUserInfoAboutClientByDrivingLicenceNo(Integer drivingLicenceNo) {

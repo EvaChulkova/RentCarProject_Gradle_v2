@@ -8,9 +8,5 @@ import java.util.List;
 public interface FilterUserRepository {
     List<User> findAllByUserFilter(UserFilter userFilter);
 
-    User findUserByLoginAndPassword(String login, String password);
-
-    User findByLogin(String login);
-
     User findClientInformationAboutUserByUserInfo(UserFilter userFilter);
 }

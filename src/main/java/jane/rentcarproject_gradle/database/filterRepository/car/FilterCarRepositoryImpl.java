@@ -3,7 +3,6 @@ package jane.rentcarproject_gradle.database.filterRepository.car;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
 import jane.rentcarproject_gradle.database.entity.Car;
-import jane.rentcarproject_gradle.database.entity.enums.CarStatusEnum;
 import jane.rentcarproject_gradle.query.QPredicate;
 import jane.rentcarproject_gradle.query.filter.CarFilter;
 import lombok.RequiredArgsConstructor;
@@ -33,39 +32,5 @@ public class FilterCarRepositoryImpl implements FilterCarRepository{
                 .from(car)
                 .where(predicate)
                 .fetch();
-    }
-
-    @Override
-    public List<Car> findCarsByStatus(CarStatusEnum carStatus) {
-        Predicate predicate = QPredicate.builder()
-                .add(carStatus, car.status::eq)
-                .buildAnd();
-
-        return new JPAQuery<Car>(entityManager)
-                .select(car)
-                .from(car)
-                .where(predicate)
-                .fetch();
-    }
-
-    @Override
-    public List<Car> findCarsInPriceRange(Integer minPrice, Integer maxPrice) {
-        Predicate predicate = QPredicate.builder()
-                .add(minPrice, car.pricePerDay::gt)
-                .add(maxPrice, car.pricePerDay::lt)
-                .buildAnd();
-
-        return new JPAQuery<Car>(entityManager)
-                .select(car)
-                .from(car)
-                .where(predicate)
-                .fetch();
-    }
-
-    @Override
-    public Car findCheapestCar() {
-        return entityManager.createQuery("select c from Car c order by c.pricePerDay asc", Car.class)
-                .setMaxResults(1)
-                .getSingleResult();
     }
 }

@@ -8,7 +8,5 @@ import java.util.List;
 public interface FilterClientRepository {
     List<Client> findAllByFilter(ClientFilter clientFilter);
 
-    Client findClientByDrivingLicenceNo(Integer drivingLicenceNo);
-
     Client findUserInfoAboutClientByDrivingLicenceNo(Integer drivingLicenceNo);
 }

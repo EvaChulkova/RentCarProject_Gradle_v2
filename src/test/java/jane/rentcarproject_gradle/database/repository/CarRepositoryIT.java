@@ -40,13 +40,13 @@ class CarRepositoryIT extends IntegrationTestBase {
 
     @Test
     void findCarsByStatusTest() {
-        List<Car> availableCarsResult = carRepository.findCarsByStatus(AVAILABLE_CAR_STATUS);
+        List<Car> availableCarsResult = carRepository.findAllByStatus(AVAILABLE_CAR_STATUS);
         assertThat(availableCarsResult).hasSize(7);
 
-        List<Car> bookedCarsResult = carRepository.findCarsByStatus(BOOKED_CAR_STATUS);
+        List<Car> bookedCarsResult = carRepository.findAllByStatus(BOOKED_CAR_STATUS);
         assertThat(bookedCarsResult).hasSize(4);
 
-        List<Car> inServiceCarsResult = carRepository.findCarsByStatus(IN_SERVICE_CAR_STATUS);
+        List<Car> inServiceCarsResult = carRepository.findAllByStatus(IN_SERVICE_CAR_STATUS);
         assertThat(inServiceCarsResult).hasSize(1);
     }
 
@@ -55,8 +55,7 @@ class CarRepositoryIT extends IntegrationTestBase {
         int minCarPrice = 2000;
         int maxCarPrice = 6000;
 
-        List<Car> carsResult = carRepository.findCarsInPriceRange(minCarPrice, maxCarPrice);
-        carsResult.forEach(System.out::println);
+        List<Car> carsResult = carRepository.findAllByPricePerDayBetween(minCarPrice, maxCarPrice);
         assertThat(carsResult).hasSize(7);
 
         List<Integer> carsPrice = carsResult.stream().map(Car::getPricePerDay).toList();
@@ -65,8 +64,10 @@ class CarRepositoryIT extends IntegrationTestBase {
 
     @Test
     void findCheapestCarTest() {
-        Car resultCar = carRepository.findCheapestCar();
-        assertThat(resultCar.getPricePerDay()).isEqualTo(2100);
+        Optional<Car> firstCheapestCar = carRepository.findTopByOrderByPricePerDayAsc();
+
+        assertThat(firstCheapestCar).isNotEmpty();
+        assertThat(firstCheapestCar.get().getPricePerDay()).isEqualTo(2100);
     }
 
 
