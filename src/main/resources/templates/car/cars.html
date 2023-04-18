@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+    <form action="/cars" method="get">
+        <label for="brand">Brand:
+            <input id="brand" type="text" name="brand">
+        </label>
+
+        <label for="model">Model:
+            <input id="model" type="text" name="model">
+        </label>
+
+        <label for="color">Color:
+            <input id="color" type="text" name="color">
+        </label>
+
+        <label for="seatAmount">Seat amount:
+            <input id="seatAmount" type="text" name="seatAmount">
+        </label>
+
+        <label for="pricePerDay">Price per day:
+            <input id="pricePerDay" type="text" name="pricePerDay">
+        </label>
+
+        <label for="status">Status:
+            <input id="status" type="text" name="status">
+        </label> <br>
+
+        <button type="submit">Filter</button>
+
+    </form>
+
+    <div th:each="car : ${cars}">
+        <a th:href="@{'/cars/' + ${car.id}}" th:text="|${car.id}. ${car.getBrand()} ${car.getModel()} ${car.getColor()} ${car.getStatus()} ${car.getPricePerDay()}|">Car</a>
+    </div>
+</body>
+</html>

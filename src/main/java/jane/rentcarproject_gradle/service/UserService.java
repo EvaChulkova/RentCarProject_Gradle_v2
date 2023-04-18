@@ -2,10 +2,10 @@ package jane.rentcarproject_gradle.service;
 
 import com.querydsl.core.types.Predicate;
 import jane.rentcarproject_gradle.database.repository.UserRepository;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
-import jane.rentcarproject_gradle.dto.UserReadDto;
-import jane.rentcarproject_gradle.mapper.UserCreateEditMapper;
-import jane.rentcarproject_gradle.mapper.UserReadMapper;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
+import jane.rentcarproject_gradle.mapper.user.UserCreateEditMapper;
+import jane.rentcarproject_gradle.mapper.user.UserReadMapper;
 import jane.rentcarproject_gradle.query.QPredicate;
 import jane.rentcarproject_gradle.query.filter.UserFilter;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +59,7 @@ public class UserService {
                 .orElseThrow();
     }
 
+
     @Transactional
     public Optional<UserReadDto> update(Long id, UserCreateEditDto userCreateEditDto) {
         return userRepository.findById(id)
@@ -76,5 +77,4 @@ public class UserService {
                 })
                 .orElse(false);
     }
-
 }

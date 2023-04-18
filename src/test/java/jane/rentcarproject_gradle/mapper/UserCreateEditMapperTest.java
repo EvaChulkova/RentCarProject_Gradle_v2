@@ -2,7 +2,8 @@ package jane.rentcarproject_gradle.mapper;
 
 import jane.rentcarproject_gradle.database.entity.User;
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.mapper.user.UserCreateEditMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 class UserCreateEditMapperTest {
     @InjectMocks
-    private  UserCreateEditMapper userCreateEditMapper;
+    private UserCreateEditMapper userCreateEditMapper;
 
 
     @Test

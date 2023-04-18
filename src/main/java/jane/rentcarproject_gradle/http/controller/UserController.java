@@ -1,7 +1,7 @@
 package jane.rentcarproject_gradle.http.controller;
 
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
 import jane.rentcarproject_gradle.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

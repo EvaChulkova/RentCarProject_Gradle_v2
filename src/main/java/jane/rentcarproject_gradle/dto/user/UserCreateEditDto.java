@@ -1,4 +1,4 @@
-package jane.rentcarproject_gradle.dto;
+package jane.rentcarproject_gradle.dto.user;
 
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
 import jane.rentcarproject_gradle.validation.UserInfo;

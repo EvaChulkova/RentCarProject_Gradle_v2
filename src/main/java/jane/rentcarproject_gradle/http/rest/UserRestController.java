@@ -1,8 +1,8 @@
 package jane.rentcarproject_gradle.http.rest;
 
 import jane.rentcarproject_gradle.dto.PageResponse;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
-import jane.rentcarproject_gradle.dto.UserReadDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
 import jane.rentcarproject_gradle.query.filter.UserFilter;
 import jane.rentcarproject_gradle.service.UserService;
 import jane.rentcarproject_gradle.validation.group.CreateAction;

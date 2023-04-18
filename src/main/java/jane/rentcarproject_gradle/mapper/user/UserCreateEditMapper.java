@@ -1,7 +1,8 @@
-package jane.rentcarproject_gradle.mapper;
+package jane.rentcarproject_gradle.mapper.user;
 
 import jane.rentcarproject_gradle.database.entity.User;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component

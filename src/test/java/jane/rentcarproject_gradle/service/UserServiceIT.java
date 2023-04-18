@@ -1,8 +1,8 @@
 package jane.rentcarproject_gradle.service;
 
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
-import jane.rentcarproject_gradle.dto.UserReadDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
 import jane.rentcarproject_gradle.integration.IntegrationTestBase;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;

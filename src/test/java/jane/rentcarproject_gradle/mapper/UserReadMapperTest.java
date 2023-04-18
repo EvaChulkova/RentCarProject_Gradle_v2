@@ -2,7 +2,8 @@ package jane.rentcarproject_gradle.mapper;
 
 import jane.rentcarproject_gradle.database.entity.User;
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserReadDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
+import jane.rentcarproject_gradle.mapper.user.UserReadMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

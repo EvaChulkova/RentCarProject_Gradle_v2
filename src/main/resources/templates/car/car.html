@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+</head>
+<body>
+    <form th:action="@{/cars/{carId}/update(carId=${car.id})}" method="post" th:object="${car}">
+        <label for="brand">Brand:
+            <input id="brand" type="text" name="brand" th:value="*{brand}">
+        </label><br>
+
+        <label for="model">Model:
+            <input id="model" type="text" name="model" th:value="*{model}">
+        </label><br>
+
+        <label for="color">Color:
+            <input id="color" type="text" name="color" th:value="*{color}">
+        </label><br>
+
+        <label for="seatAmount">Seat amount:
+            <input id="seatAmount" type="text" name="seatAmount" th:value="*{seatAmount}">
+        </label><br>
+
+        <label for="pricePerDay">Price per day:
+            <input id="pricePerDay" type="text" name="pricePerDay" th:value="*{pricePerDay}">
+        </label><br>
+
+        <label for="status">Status:
+            <input id="status" type="text" name="status" th:value="*{status}">
+        </label><br>
+
+        <!--<div th:each="status : ${statuses}">
+            <input th:id="${status}" type="radio" name="status" th:value="${status}">
+            <label th:for="${status}" th:text="${status}">Status</label>
+        </div>-->
+
+        <button>Update</button><br>
+    </form>
+
+    <form th:action="@{/cars/{carId}/delete(carId=${car.id})}" method="post">
+        <button type="submit">Remove</button>
+    </form>
+</body>
+</html>
