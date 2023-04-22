@@ -14,7 +14,11 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
@@ -22,7 +26,8 @@ class UserControllerIT extends IntegrationTestBase {
     private final MockMvc mockMvc;
 
     @Test
-    void findAllUsersIT() throws Exception {
+    @SneakyThrows
+    void findAllUsersIT() {
         mockMvc.perform(get("/users"))
                 .andExpectAll(
                         status().is2xxSuccessful(),

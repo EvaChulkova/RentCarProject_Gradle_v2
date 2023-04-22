@@ -33,6 +33,6 @@
 
     <div th:each="user : ${users}">
         <a th:href="@{'/users/' + ${user.id}}" th:text="|${user.id}. ${user.getLogin()}|">User</a>
-    </div>
+    </div><br>
 </body>
 </html>

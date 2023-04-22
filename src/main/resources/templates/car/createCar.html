@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car</title>
+    <title>Create car</title>
 </head>
 <body>
-    <form th:action="@{/cars/{carId}/update(carId=${car.id})}" method="post" th:object="${car}">
+    <form th:action="@{/cars}" method="post" th:object="${car}">
         <label for="brand">Brand:
             <input id="brand" type="text" name="brand" th:value="*{brand}">
         </label><br>
@@ -14,9 +14,14 @@
             <input id="model" type="text" name="model" th:value="*{model}">
         </label><br>
 
-        <label for="color">Color:
+        <!--<label for="color">Color:
             <input id="color" type="text" name="color" th:value="*{color}">
-        </label><br>
+        </label><br>-->
+
+        <div th:each="color : ${colors}">Color:
+            <input th:id="${color}" type="radio" name="color" th:value="${color}">
+            <label th:for="${color}" th:text="${color}">Status</label>
+        </div>
 
         <label for="seatAmount">Seat amount:
             <input id="seatAmount" type="text" name="seatAmount" th:value="*{seatAmount}">
@@ -26,20 +31,16 @@
             <input id="pricePerDay" type="text" name="pricePerDay" th:value="*{pricePerDay}">
         </label><br>
 
-        <label for="status">Status:
+        <!--<label for="status">Status:
             <input id="status" type="text" name="status" th:value="*{status}">
-        </label><br>
+        </label><br>-->
 
-        <!--<div th:each="status : ${statuses}">
+        <div th:each="status : ${statuses}">Status:
             <input th:id="${status}" type="radio" name="status" th:value="${status}">
             <label th:for="${status}" th:text="${status}">Status</label>
-        </div>-->
+        </div>
 
-        <button type="submit">Update car</button><br>
-    </form>
-
-    <form th:action="@{/cars/{carId}/delete(carId=${car.id})}" method="post">
-        <button type="submit">Remove car</button>
+        <button type="submit">Create car</button><br>
     </form>
 </body>
 </html>

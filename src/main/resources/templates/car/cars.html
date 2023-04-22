@@ -30,12 +30,16 @@
             <input id="status" type="text" name="status">
         </label> <br>
 
-        <button type="submit">Filter</button>
+        <button type="submit">Filter</button><br>
 
     </form>
 
     <div th:each="car : ${cars}">
         <a th:href="@{'/cars/' + ${car.id}}" th:text="|${car.id}. ${car.getBrand()} ${car.getModel()} ${car.getColor()} ${car.getStatus()} ${car.getPricePerDay()}|">Car</a>
-    </div>
+    </div><br>
+
+    <form action="/cars/createCar">
+        <button type="submit">Create car</button>
+    </form>
 </body>
 </html>

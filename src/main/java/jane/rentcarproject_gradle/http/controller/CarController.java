@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 @Slf4j
 @Controller
 @RequestMapping("/cars")
@@ -39,8 +41,20 @@ public class CarController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/createCar")
+    public String create(Model model,
+                         CarCreateEditDto carCreateEditDto) {
+
+        model.addAttribute("car", carCreateEditDto);
+        model.addAttribute("colors", CarColorEnum.values());
+        model.addAttribute("statuses", CarStatusEnum.values());
+
+        return "car/createCar";
+    }
+
+
     @PostMapping
-    public String create(@ModelAttribute CarCreateEditDto carCreateEditDto) {
+    public String create(@Valid CarCreateEditDto carCreateEditDto) {
 
         return "redirect:/cars/" + carService.create(carCreateEditDto).getId();
     }
