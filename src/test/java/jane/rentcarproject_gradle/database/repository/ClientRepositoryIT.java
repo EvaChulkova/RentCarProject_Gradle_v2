@@ -34,6 +34,16 @@ class ClientRepositoryIT extends IntegrationTestBase {
     }
 
     @Test
+    void findClientByUserId() {
+        Long userId = 3L;
+
+        Optional<Client> clientByUserId = clientRepository.findByUserId(userId);
+
+        assertTrue(clientByUserId.isPresent());
+        clientByUserId.ifPresent(client -> assertEquals(userId, clientByUserId.get().getUser().getId()));
+    }
+
+    @Test
     void findClientByDrivingLicenceNoTest() {
         Integer drivingLicenceNo = 136015;
         

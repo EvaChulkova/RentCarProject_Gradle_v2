@@ -53,7 +53,8 @@ public class CarService {
     @Transactional
     public boolean delete(Long id) {
         return carRepository.findById(id)
-                .map(entity -> {carRepository.delete(entity);
+                .map(entity -> {
+                    carRepository.delete(entity);
                     carRepository.flush();
                     return true;
                 })

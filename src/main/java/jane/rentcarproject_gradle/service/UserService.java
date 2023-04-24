@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static jane.rentcarproject_gradle.database.entity.QUser.user;
 
@@ -42,7 +43,7 @@ public class UserService {
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public Optional<UserReadDto> findById(Long id) {

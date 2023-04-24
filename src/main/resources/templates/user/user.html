@@ -31,6 +31,8 @@
         <button type="submit">Update user</button>
     </form>
 
+
+
     <form th:action="@{/users/{userId}/delete(userId=${user.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">
         <button type="submit">Remove user</button>
     </form>

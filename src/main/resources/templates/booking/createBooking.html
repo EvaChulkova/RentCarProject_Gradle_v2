@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Booking</title>
+</head>
+<body>
+    <form action="@{/bookings}" method="post" th:object="${booking}">
+
+        <label for="rentalStart">Rental Start:
+            <input id="rentalStart" type="text" name="rentalStart" th:value="*{rentalStart}">
+        </label>
+
+        <label for="rentalFinish">Rental Finish:
+            <input id="rentalFinish" type="text" name="rentalFinish" th:value="*{rentalFinish}">
+        </label>
+
+        <label for="status">Booking status:
+            <input id="status" type="text" name="status" th:value="*{status}">
+        </label>
+
+        <label for="paymentState">Payment State:
+            <input id="paymentState" type="text" name="paymentState" th:value="*{paymentState}">
+        </label>
+
+        <label for="comment">Comment:
+            <input id="comment" type="text" name="comment" th:value="*{comment}">
+        </label>
+
+        <b>Client details</b><br>
+        <div>
+            <label
+                    th:text="|${booking.clientReadDto.id}
+                        ${booking.clientReadDto.userReadDto.getFirstName()}
+                        ${booking.clientReadDto.userReadDto.getLastName()}
+                        ${booking.clientReadDto.getDrivingLicenceNo()}|">
+            </label>
+        </div><br>
+
+        <b>Car details</b>
+        <div>
+            <label
+                    th:text="|${booking.carReadDto.id}
+                        ${booking.carReadDto.getBrand()}
+                        ${booking.carReadDto.getModel()}
+                        ${booking.carReadDto.getPricePerDay()}
+                        ${booking.carReadDto.getPrice()}|"></label>
+        </div>
+
+
+        <button type="submit">Create booking</button>
+
+    </form>
+</body>
+</html>
