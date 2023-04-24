@@ -5,7 +5,7 @@
     <title>Booking</title>
 </head>
 <body>
-    <form action="@{/bookings/{bookingId}/update(bookingId=${booking.id})}" method="post" th:object="${booking}">
+    <form th:action="@{/bookings/{bookingId}/update(bookingId=${booking.id})}" method="post" th:object="${booking}">
 
         <label for="rentalStart">Rental Start:
             <input id="rentalStart" type="text" name="rentalStart" th:value="*{rentalStart}">
@@ -29,7 +29,7 @@
 
         <br>
         <b>Client details</b><br>
-            <div>
+            <!--<div>
                 <label
                     th:text="|${booking.clientReadDto.id}
                     ${booking.clientReadDto.userReadDto.getFirstName()}
@@ -37,10 +37,18 @@
                     ${booking.clientReadDto.getDrivingLicenceNo()}|">
                 </label>
             </div>
-        <br>
+        <br>-->
 
-        <b>Car details</b>
-            <div>
+        <label for="client">Client:
+            <select name="clientId" id="client">
+                <option th:each="client: ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.id}">Client ID:</option>
+            </select>
+        </label><br>
+
+        <b>Car details</b><br>
+            <!--<div>
                 <label
                     th:text="|${booking.carReadDto.id}
                     ${booking.carReadDto.getBrand()}
@@ -48,7 +56,15 @@
                     ${booking.carReadDto.getPricePerDay()}
                     ${booking.carReadDto.getColor()}|">
                 </label>
-            </div>
+            </div>-->
+
+        <label for="car">Car:
+            <select name="carId" id="car">
+                <option th:each="car: ${cars}"
+                        th:value="${car.id}"
+                        th:text="${car.id}">Car ID:</option>
+            </select>
+        </label><br>
 
 
         <button type="submit">Update booking</button>

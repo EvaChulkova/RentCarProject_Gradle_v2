@@ -37,8 +37,8 @@ public class BookingController {
         return bookingService.findById(id)
                 .map(booking -> {
                     model.addAttribute("booking", booking);
-                    model.addAttribute("client", clientService.findAll());
-                    model.addAttribute("car", carService.findAll());
+                    model.addAttribute("clients", clientService.findAll());
+                    model.addAttribute("cars", carService.findAll());
 
                     return "booking/booking";
                 })
@@ -61,7 +61,7 @@ public class BookingController {
         return "redirect:/bookings/" + bookingService.create(bookingCreateEditDto).getId();
     }
 
-    @GetMapping("/{id}/update")
+    @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id,
                          @ModelAttribute BookingCreateEditDto bookingCreateEditDto) {
 
