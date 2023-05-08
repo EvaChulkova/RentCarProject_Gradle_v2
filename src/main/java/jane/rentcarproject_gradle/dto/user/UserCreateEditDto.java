@@ -7,6 +7,7 @@ import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Value
@@ -22,7 +23,10 @@ public class UserCreateEditDto {
     @Email
     String login;
 
-    String password;
+    @NotBlank(groups = CreateAction.class)
+    String rawPassword;
+
+    /*String password;*/
 
     RoleEnum role;
 }

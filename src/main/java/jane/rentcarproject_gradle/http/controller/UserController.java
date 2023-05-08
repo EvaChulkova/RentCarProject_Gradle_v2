@@ -37,7 +37,6 @@ public class UserController {
                 .map(user -> {
                     model.addAttribute("user", user);
                     model.addAttribute("roles", RoleEnum.values());
-                    //model.addAttribute("client", clientService.findClientByUserId(id));
                     return "user/user";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -61,7 +60,8 @@ public class UserController {
 
             return "redirect:/users/registration";
         }
-        return "redirect:/users/" + userService.create(user).getId();
+        userService.create(user);
+        return "redirect:/login";
     }
 
     @PostMapping("/{id}/update")
