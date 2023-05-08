@@ -26,7 +26,5 @@ public class UserCreateEditDto {
     @NotBlank(groups = CreateAction.class)
     String rawPassword;
 
-    /*String password;*/
-
     RoleEnum role;
 }
