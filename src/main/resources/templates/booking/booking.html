@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+</head>
+<body>
+    <form th:action="@{/bookings/{bookingId}/update(bookingId=${booking.id})}" method="post" th:object="${booking}">
+
+        <label for="rentalStart">Rental Start:
+            <input id="rentalStart" type="text" name="rentalStart" th:value="*{rentalStart}">
+        </label><br>
+
+        <label for="rentalFinish">Rental Finish:
+            <input id="rentalFinish" type="text" name="rentalFinish" th:value="*{rentalFinish}">
+        </label><br>
+
+        <label for="status">Booking status:
+            <input id="status" type="text" name="status" th:value="*{status}">
+        </label><br>
+
+        <label for="paymentState">Payment State:
+            <input id="paymentState" type="text" name="paymentState" th:value="*{paymentState}">
+        </label><br>
+
+        <label for="comment">Comment:
+            <input id="comment" type="text" name="comment" th:value="*{comment}">
+        </label><br>
+
+        <br>
+        <b>Client details</b><br>
+            <!--<div>
+                <label
+                    th:text="|${booking.clientReadDto.id}
+                    ${booking.clientReadDto.userReadDto.getFirstName()}
+                    ${booking.clientReadDto.userReadDto.getLastName()}
+                    ${booking.clientReadDto.getDrivingLicenceNo()}|">
+                </label>
+            </div>
+        <br>-->
+
+        <label for="client">Client:
+            <select name="clientId" id="client">
+                <option th:each="client: ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.id}">Client ID:</option>
+            </select>
+        </label><br>
+
+        <b>Car details</b><br>
+            <!--<div>
+                <label
+                    th:text="|${booking.carReadDto.id}
+                    ${booking.carReadDto.getBrand()}
+                    ${booking.carReadDto.getModel()}
+                    ${booking.carReadDto.getPricePerDay()}
+                    ${booking.carReadDto.getColor()}|">
+                </label>
+            </div>-->
+
+        <label for="car">Car:
+            <select name="carId" id="car">
+                <option th:each="car: ${cars}"
+                        th:value="${car.id}"
+                        th:text="${car.id}">Car ID:</option>
+            </select>
+        </label><br>
+
+
+        <button type="submit">Update booking</button>
+    </form>
+
+    <form th:action="@{/bookings/{bookingId}/delete(bookingId=${booking.id})}" method="post">
+        <button type="submit">Remove booking</button>
+    </form>
+</body>
+</html>

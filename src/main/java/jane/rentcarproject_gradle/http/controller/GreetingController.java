@@ -1,7 +1,7 @@
 package jane.rentcarproject_gradle.http.controller;
 
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserReadDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

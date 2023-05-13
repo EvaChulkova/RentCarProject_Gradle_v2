@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+</head>
+<body>
+    <form th:action="@{/clients/{clientId}/update(clientId=${client.id})}" method="post" th:object="${client}">
+
+        <label for="birthDate">Birth Date:
+            <input id="birthDate" type="text" name="birthDate" th:value="*{birthDate}">
+        </label><br>
+
+        <label for="drivingLicenceNo">Driving Licence No:
+            <input id="drivingLicenceNo" type="text" name="drivingLicenceNo" th:value="*{drivingLicenceNo}">
+        </label><br>
+
+        <label for="validity">Validity:
+            <input id="validity" type="text" name="validity" th:value="*{validity}">
+        </label><br>
+
+
+        <b>User details</b><br>
+        <div>
+            <label
+            th:text="|${client.userReadDto.id}
+            ${client.userReadDto.getFirstName()}
+            ${client.userReadDto.getLastName()}
+            ${client.userReadDto.getLogin()}|">
+            </label>
+        </div>
+
+
+        <button type="submit">Update client</button>
+    </form>
+
+    <form th:action="@{/clients/{clientId}/delete(clientId=${client.id})}" method="post">
+        <button type="submit">Remove client</button>
+    </form>
+</body>
+</html>

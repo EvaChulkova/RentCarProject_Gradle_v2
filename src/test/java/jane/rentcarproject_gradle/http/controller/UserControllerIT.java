@@ -1,7 +1,7 @@
 package jane.rentcarproject_gradle.http.controller;
 
 import jane.rentcarproject_gradle.database.entity.enums.RoleEnum;
-import jane.rentcarproject_gradle.dto.UserReadDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
 import jane.rentcarproject_gradle.integration.IntegrationTestBase;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -9,12 +9,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static jane.rentcarproject_gradle.dto.UserCreateEditDto.Fields.*;
+import static jane.rentcarproject_gradle.dto.user.UserCreateEditDto.Fields.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
@@ -22,7 +26,8 @@ class UserControllerIT extends IntegrationTestBase {
     private final MockMvc mockMvc;
 
     @Test
-    void findAllUsersIT() throws Exception {
+    @SneakyThrows
+    void findAllUsersIT() {
         mockMvc.perform(get("/users"))
                 .andExpectAll(
                         status().is2xxSuccessful(),

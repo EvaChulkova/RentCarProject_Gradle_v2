@@ -2,20 +2,25 @@ package jane.rentcarproject_gradle.service;
 
 import com.querydsl.core.types.Predicate;
 import jane.rentcarproject_gradle.database.repository.UserRepository;
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
-import jane.rentcarproject_gradle.dto.UserReadDto;
-import jane.rentcarproject_gradle.mapper.UserCreateEditMapper;
-import jane.rentcarproject_gradle.mapper.UserReadMapper;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserReadDto;
+import jane.rentcarproject_gradle.mapper.user.UserCreateEditMapper;
+import jane.rentcarproject_gradle.mapper.user.UserReadMapper;
 import jane.rentcarproject_gradle.query.QPredicate;
 import jane.rentcarproject_gradle.query.filter.UserFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static jane.rentcarproject_gradle.database.entity.QUser.user;
 
@@ -23,7 +28,7 @@ import static jane.rentcarproject_gradle.database.entity.QUser.user;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
@@ -42,7 +47,7 @@ public class UserService {
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public Optional<UserReadDto> findById(Long id) {
@@ -58,6 +63,7 @@ public class UserService {
                 .map(userReadMapper::map)
                 .orElseThrow();
     }
+
 
     @Transactional
     public Optional<UserReadDto> update(Long id, UserCreateEditDto userCreateEditDto) {
@@ -77,4 +83,14 @@ public class UserService {
                 .orElse(false);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByLogin(username)
+                .map(user -> new org.springframework.security.core.userdetails.User(
+                        user.getLogin(),
+                        user.getPassword(),
+                        Collections.singleton(user.getRole())
+                ))
+                .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
+    }
 }

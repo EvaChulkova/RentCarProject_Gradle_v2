@@ -11,4 +11,6 @@ public interface ClientRepository extends
         FilterClientRepository {
 
     Optional<Client> findByDrivingLicenceNo(Integer drivingLicenceNo);
+
+    Optional<Client> findByUserId(Long userId);
 }

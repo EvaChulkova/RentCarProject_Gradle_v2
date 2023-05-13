@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users
     first_name VARCHAR(128) NOT NULL,
     last_name  VARCHAR(128) NOT NULL,
     login      VARCHAR(128) NOT NULL UNIQUE,
-    password   VARCHAR(128) NOT NULL,
+    password   VARCHAR(128) NOT NULL DEFAULT '{noop}123',
     role       VARCHAR(64)
 );
 --rollback DROP TABLE users;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create client</title>
+</head>
+<body>
+
+    <form th:action="@{/clients}" method="post" th:object="${client}">
+
+        <label for="birthDate">Birth Date:
+            <input id="birthDate" type="text" name="birthDate" th:value="*{birthDate}">
+        </label><br>
+
+        <label for="drivingLicenceNo">Driving Licence No:
+            <input id="drivingLicenceNo" type="text" name="drivingLicenceNo" th:value="*{drivingLicenceNo}">
+        </label><br>
+
+        <label for="validity">Validity:
+            <input id="validity" type="text" name="validity" th:value="*{validity}">
+        </label><br>
+
+        <button type="submit">Create client</button><br>
+    </form>
+
+</body>
+</html>

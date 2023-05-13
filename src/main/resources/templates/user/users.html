@@ -5,6 +5,9 @@
     <title>Users</title>
 </head>
 <body>
+
+    <div th:insert="~{fragment :: header}"></div>
+
     <form action="/users" method="get">
         <label for="firstName">Firstname:
             <input id="firstName" type="text" name="firstName" >
@@ -33,6 +36,6 @@
 
     <div th:each="user : ${users}">
         <a th:href="@{'/users/' + ${user.id}}" th:text="|${user.id}. ${user.getLogin()}|">User</a>
-    </div>
+    </div><br>
 </body>
 </html>
