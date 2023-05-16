@@ -49,7 +49,7 @@ public class UserServiceIT extends IntegrationTestBase {
         assertEquals(userCreateEditDto.getFirstName(), actualResult.getFirstName());
         assertEquals(userCreateEditDto.getLastName(), actualResult.getLastName());
         assertEquals(userCreateEditDto.getLogin(), actualResult.getLogin());
-        assertEquals(userCreateEditDto.getPassword(), actualResult.getPassword());
+        assertEquals(userCreateEditDto.getRawPassword(), actualResult.getPassword());
         assertSame(userCreateEditDto.getRole(), actualResult.getRole());
     }
 
@@ -70,7 +70,7 @@ public class UserServiceIT extends IntegrationTestBase {
             assertEquals(userCreateEditDto.getFirstName(), user.getFirstName());
             assertEquals(userCreateEditDto.getLastName(), user.getLastName());
             assertEquals(userCreateEditDto.getLogin(), user.getLogin());
-            assertEquals(userCreateEditDto.getPassword(), user.getPassword());
+            assertEquals(userCreateEditDto.getRawPassword(), user.getPassword());
             assertSame(userCreateEditDto.getRole(), user.getRole());
         });
     }
