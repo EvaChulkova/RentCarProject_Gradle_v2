@@ -1,6 +1,6 @@
 package jane.rentcarproject_gradle.validation.impl;
 
-import jane.rentcarproject_gradle.dto.UserCreateEditDto;
+import jane.rentcarproject_gradle.dto.user.UserCreateEditDto;
 import jane.rentcarproject_gradle.validation.UserInfo;
 import org.springframework.stereotype.Component;
 

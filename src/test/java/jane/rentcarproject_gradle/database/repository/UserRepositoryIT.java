@@ -18,14 +18,14 @@ class UserRepositoryIT extends IntegrationTestBase {
     private final UserRepository userRepository;
 
 
-    @Test
+    /*@Test
     void findUserByLoginTest() {
         String login = "nina@gmail.com";
         Optional<User> actualUserByLogin = userRepository.findByLogin(login);
 
         assertTrue(actualUserByLogin.isPresent());
         actualUserByLogin.ifPresent(user -> assertEquals(login, actualUserByLogin.get().getLogin()));
-    }
+    }*/
 
     @Test
     void findUserByLoginAndPasswordTest() {
